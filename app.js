@@ -4,12 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-// var mysql= require('mysql');
+var mysql= require('mysql');
 var http = require('http');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var getBookmark = require('./routes/getbookmark');
 var app = express();
 
 // view engine setup
@@ -22,21 +22,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Database connection
-// app.use(function(req, res, next){
-// 	global.connection = mysql.createConnection({
-// 	  	host: 'localhost',
-// 	  	user: 'root',
-//       password: 'root',
-//       database : 'bookmark'
-// 	});
-// 	connection.connect();
-// 	next();
-// });
+// Database connection
+app.use(function(req, res, next){
+	global.connection = mysql.createConnection({
+	  	host: 'localhost',
+	  	user: 'root',
+      password: 'root',
+      database : 'bookmark'
+	});
+	connection.connect();
+	next();
+});
+// setting app headers
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "POST, GET");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/getbookmarks', getBookmark);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
