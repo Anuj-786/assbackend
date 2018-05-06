@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var mysql= require('mysql');
+// var mysql= require('mysql');
 var http = require('http');
 
 var indexRouter = require('./routes/index');
@@ -23,16 +23,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Database connection
-app.use(function(req, res, next){
-	global.connection = mysql.createConnection({
-	  	host: 'localhost',
-	  	user: 'root',
-      password: 'root',
-      database : 'bookmark'
-	});
-	res.locals.connect();
-	next();
-});
+// app.use(function(req, res, next){
+// 	global.connection = mysql.createConnection({
+// 	  	host: 'localhost',
+// 	  	user: 'root',
+//       password: 'root',
+//       database : 'bookmark'
+// 	});
+// 	connection.connect();
+// 	next();
+// });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
