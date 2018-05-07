@@ -26,12 +26,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Database connection
 app.use(function(req, res, next){
 	global.connection = mysql.createConnection({
-	  	host: 'db4free.net:3306',
+	  	host: 'db4free.net',
 	  	user: 'reactapp',
       password: 'reactapp123',
       database : 'reactapp'
 	});
-	connection.connect();
+	connection.connect(function(error) {
+		if(error) {
+	    console.error('error connecting: ' + error.stack);
+	    return;
+	  }
+
+	  console.log('connected as id ' + connection.threadId);
+	});
 	next();
 });
 // app.use(function(req, res, next){
