@@ -11,6 +11,8 @@ router.get('/', function(req, res, next) {
   			res.send({"status": 200, "error": null, "response": results});
   			//If there is no error, all is good and response is 200OK.
 	  	}
+      console.log(res.body)
+      console.log(req.body)
   });
 });
 
