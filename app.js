@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mysql= require('mysql');
-// var http = require('http');
-
+// importin routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var getBookmark = require('./routes/getbookmark');
@@ -23,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Database connection
+// Database connection remote
 app.use(function(req, res, next){
 	global.connection = mysql.createConnection({
 	  	host: 'db4free.net',
@@ -41,6 +40,7 @@ app.use(function(req, res, next){
 	});
 	next();
 });
+// local testing mysql handler
 // app.use(function(req, res, next){
 // 	global.connection = mysql.createConnection({
 // 	  	host: 'localhost',
@@ -51,6 +51,7 @@ app.use(function(req, res, next){
 // 	connection.connect();
 // 	next();
 // });
+
 // setting app headers
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -64,7 +65,7 @@ app.use(function(req, res, next) {
 	}
   next();
 });
-
+// routes handler
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/getbookmarks', getBookmark);
@@ -87,5 +88,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-// var server = http.createServer(app);
-// server.listen(4001);

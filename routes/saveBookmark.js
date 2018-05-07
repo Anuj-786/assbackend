@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* saving bookmark handler*/
 router.post('/', function(req, res, next) {
   connection.query('INSERT INTO bookmark VALUES(NULL, "' + req.body.url + '", "' + req.body.user_id + '")', function (error, results, fields) {
     if(error){

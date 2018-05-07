@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* handler for bookmark listing */
 router.get('/', function(req, res, next) {
   connection.query('SELECT * from bookmark', function (error, results, fields) {
 	  	if(error){

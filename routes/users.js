@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* handler for saving user email */
 router.post('/', function(req, res, next) {
   // var insertQuery = 'INSERT INTO users VALUES(NULL,"' + req.body.email + '", "' + req.body.token + '")'
   var selectQuery = "SELECT * FROM users WHERE email = '"+req.body.email+"' ORDER BY email LIMIT 1";
