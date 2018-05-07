@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
       //If there is error, we send the error in the error section with 500 status
     }
      else {
-
+      var query = connection.query('SELECT * from bookmark');
       res.send({"status": 200, "error": null, "response": results});
       //If there is no error, all is good and response is 200OK.
     }
