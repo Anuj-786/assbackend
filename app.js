@@ -24,26 +24,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Database connection
-// app.use(function(req, res, next){
-// 	global.connection = mysql.createConnection({
-// 	  	host: 'db4free.net:3306',
-// 	  	user: 'reactapp',
-//       password: 'reactapp123',
-//       database : 'reactapp'
-// 	});
-// 	connection.connect();
-// 	next();
-// });
 app.use(function(req, res, next){
 	global.connection = mysql.createConnection({
-	  	host: 'localhost',
-	  	user: 'root',
-      password: 'root',
-      database : 'bookmark'
+	  	host: 'db4free.net:3306',
+	  	user: 'reactapp',
+      password: 'reactapp123',
+      database : 'reactapp'
 	});
 	connection.connect();
 	next();
 });
+// app.use(function(req, res, next){
+// 	global.connection = mysql.createConnection({
+// 	  	host: 'localhost',
+// 	  	user: 'root',
+//       password: 'root',
+//       database : 'bookmark'
+// 	});
+// 	connection.connect();
+// 	next();
+// });
 // setting app headers
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
